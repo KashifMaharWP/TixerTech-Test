@@ -54,7 +54,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            // ---------------------- BANNER + TOP BAR + PROFILE PIC ----------------------
+           
             SizedBox(
               height: 240.h,
               child: Stack(
@@ -72,7 +72,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                       ),
                     ),
                   ),
-                  // Back + Close icons
+                 
                   Positioned(
                     top: 40.h,
                     left: 20.w,
@@ -103,7 +103,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                       ],
                     ),
                   ),
-                  // Profile Picture
+                  
                   Positioned(
                     left: 20.w,
                     bottom: -50.h,
@@ -139,7 +139,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
             ),
             SizedBox(height: 70.h),
 
-            //---------------------- FULL NAME TEXT FIELD ----------------------
+            
             Container(
               margin: EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.h),
               padding: EdgeInsets.symmetric(horizontal: 14.w, vertical: 6.h),
@@ -166,7 +166,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
               ),
             ),
 
-            //---------------------- BIO TEXT FIELD ----------------------
+            
             Container(
               margin: EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.h),
               padding: EdgeInsets.symmetric(horizontal: 14.w, vertical: 6.h),
@@ -196,12 +196,12 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
 
             SizedBox(height: 30.h),
 
-            //---------------------- UPDATE BUTTON ----------------------
+           
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 40.w),
               child: GestureDetector(
                 onTap: () async {
-                  // Show success message
+                  
                   Get.back();
                 },
                 child: Container(
