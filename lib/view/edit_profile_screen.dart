@@ -6,7 +6,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:test_project/controllers/edit_profile_controller.dart';
 
 import 'package:image_picker/image_picker.dart';
-
+import 'package:permission_handler/permission_handler.dart';
 class EditProfileScreen extends StatefulWidget {
   const EditProfileScreen({super.key});
 
@@ -27,19 +27,27 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   }
 
   Future<void> pickImage() async {
-    final picker = ImagePicker();
-    final pickedFile = await picker.pickImage(source: ImageSource.gallery);
-
-    if (pickedFile != null) {
-      if (kIsWeb) {
-        final bytes = await pickedFile.readAsBytes();
-        controller.updateProfileImageWeb(bytes);
-      } else {
-        controller.updateProfileImageWeb(await pickedFile.readAsBytes());
+  if (!kIsWeb) {
+    // Simplified approach - request storage permission
+    var status = await Permission.storage.request();
+    if (!status.isGranted) {
+      // If storage is denied, try photos permission (for Android 13+)
+      status = await Permission.photos.request();
+      if (!status.isGranted) {
+        Get.snackbar("Permission Denied", "Please allow access to gallery");
+        return;
       }
     }
   }
 
+  final picker = ImagePicker();
+  final pickedFile = await picker.pickImage(source: ImageSource.gallery);
+
+  if (pickedFile != null) {
+    final bytes = await pickedFile.readAsBytes();
+    controller.updateProfileImageWeb(bytes);
+  }
+}
   @override
   void dispose() {
     nameController.dispose();
